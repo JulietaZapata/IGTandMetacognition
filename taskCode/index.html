@@ -1,0 +1,288 @@
+﻿<!doctype html>
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if gte IE 9]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<head>
+	<title>Iowa Gambling Task</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+	<meta name="description" content="Iowa Gambing Task" />
+	<meta name="keywords" content="OGT, IGT, Gambling Task, Iowa Gambling Task, Bechara's Gambling Task" /> 
+	<meta name="author" content="Ben Margevicius" />
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Alegreya">
+    <link rel="stylesheet" type="text/css" href="igt.css">
+
+
+<!---	<script>
+	    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	    ga('create', 'UA-58996218-1', 'auto');
+	    ga('send', 'pageview');
+
+	</script>-->
+	<script type="text/javascript" src="jquery-2.1.4.js"></script>
+	<script src="jatos.js"></script>
+	<script src="igt.016.js"></script>
+	<script src='validate_fields.js'></script>
+	<!--<script src="igt.016.min.js"></script>-->
+	
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>    
+		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+ </head>
+ 
+<body>
+ 
+<main class="container">
+	<section class="row">
+		<div class="col-xs-3">
+			<figure>
+				<a id="card-one" href="#" class="card">
+					<img class="img-responsive" alt="card back 1" src="blue-backA.png" />
+				</a>
+				<figcaption>
+				 <span id="deck-one-clicks"></span>
+				</figcaption>
+			</figure>
+		</div>
+		<div class="col-xs-3">
+			<figure>
+				<a id="card-two" href="#" class="card">
+					<img class="img-responsive" alt="card back 1" src="blue-backB.png" />
+				</a>
+				<figcaption>
+				<span id="deck-two-clicks"></span>
+				</figcaption>
+			</figure>
+		</div>
+		<div class="col-xs-3">
+			<figure>
+				<a id="card-three"  href="#" class="card">
+					<img class="img-responsive" alt="card back 1" src="blue-backC.png" />
+				</a>
+				<figcaption>
+				 <span id="deck-three-clicks"></span>
+				</figcaption>
+			</figure>
+		</div>
+		<div class="col-xs-3">
+			<figure>
+				<a id="card-four" href="#" class="card">
+					<img class="img-responsive" alt="card back 1" src="blue-backD.png" />
+				</a>
+				<figcaption>
+				 <span id="deck-four-clicks"></span>
+				</figcaption>
+			</figure>
+		</div>
+	</section>
+	
+	<section class="row" >
+		<p id="cashpilelabel" style="font-weight: bold;font-size: 20px;">Cantidad de dinero que tenés:</p>
+		<div class="progress">
+			<div id="cashpilebar" class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="2000" aria-valuemin="0" aria-valuemax="6000" style="width: 33%">
+				<span id="cashpileamt" style="font-weight: bold;font-size: large">$2000</span>				
+			</div>
+		</div>
+	</section>
+	
+	<section class="row">
+		<div id="gamelog">
+            <p class="outputtext" style="font-weight: bold;font-size: 25px;">Ganaste: <span id="winamt"></span></p>
+            <p class="outputtext" style="font-weight: bold;font-size: 25px;">Perdiste: <span id="penaltyamt"></span></p>
+            <p class="outputtext" style="font-weight: bold;font-size: 25px;">Resultado neto +/-: <span id="netgains"></span></p>
+            <p class="outputtext" style="font-weight: bold;font-size: 25px;">Total de dinero: <span id="totalmoney"></span></p>
+		</div>
+	</section>
+	<!-- informed consent-->
+	
+	<div class='inicio' id='consentimiento'>
+		<h1><b>¡BIENVENIDX!</b></h1>
+		<p>Gracias por sumarte a este experimento online. Antes de contarte de qué se trata, para participar tendrás que leer la información sobre el estudio y aceptar el consentimiento informado.</p>
+		<hr>
+		<h3>INFORMACIÓN SOBRE EL ESTUDIO:</h3>
+		<p>Usted está siendo invitado/a a participar de un proyecto de investigación denominado <i>Tarea de Apuestas de Iowa y Metacognición</i> que se desarrolla en Instituto de Investigaciones Psicológicas (IIPsi - CONICET - Facultad de Psicología, Universidad Nacional de Córdoba) y es coordinado por el Lic. Nicolás Alejandro Comay y la Lic. Julieta María Zapata. </p>
+		<p>Antes de otorgar su consentimiento es importante que lea cuidadosamente y comprenda la información detallada sobre el presente estudio. Puede realizar todas las preguntas que desee o solicitar la explicación de palabras que no comprenda.
+		</p>
+		<p>Se utilizarán los datos para una investigación psicológica cuyo objetivo es evaluar la influencia del conocimiento sobre la toma de decisiones en una tarea de apuestas (Tarea de Apuestas de Iowa). </p>
+		<p>Su participación consistirá en realizar una tarea de manera online. Se trata de un juego de cartas en el que, en cada ensayo, puede ganar o perder dinero ficticio. El objetivo del juego es finalizar con la mayor cantidad de dinero posible. Las instrucciones se muestran en mayor detalle antes de comenzar. El tiempo de duración de la tarea será de 25 minutos, aproximadamente. Le pedimos que realice la tarea hasta el final ya que, de lo contrario, no se guardan los datos en el sistema (aunque puede abandonar la tarea libremente cuando quiera si lo cree necesario simplemente cerrando esta ventana).   </p>
+		<p>Riesgos e incomodidades previstas: Participar en esta investigación tiene riesgos nulos. Puede abandonar el estudio o suspender su participación cuando así lo desee y sin explicación alguna. Su negativa a participar no le ocasionará ningún perjuicio.
+		</p>
+		<p>Beneficios y compensaciones: según el puntaje con el que finalice el juego usted tiene la posibilidad de ganar un premio. Los tres participantes (entre 50 personas) que logren los mejores puntajes en la tarea obtendrán un voucher de compra en una librería: un monto de $3000 para el primer puesto, $2000 para el segundo puesto y $1000 para el tercer puesto. Al finalizar la toma de datos nos comunicaremos por mail con los ganadores para coordinar la entrega del premio. Es por esta razón que le solicitaremos su dirección de mail al finalizar, para comunicarnos en caso de que resulte ganador (su dirección de email no será difundida con otros fines). En caso de haber empate entre participantes, el premio será sorteado entre los jugadores que hayan finalizado con el mismo puntaje.</p>
+		<p>Aceptando el consentimiento informado, usted no renuncia a ninguno de los derechos que le corresponden según las leyes de nuestro país. Los resultados podrán ser publicados en revistas científicas o presentados en congresos, pero no incluirán datos personales que puedan identificarlo. La Ley 25.326 de protección de datos personales salvaguarda su información personal. Los datos personales, es decir los registros que se efectúen, serán identificados solo con un código y solo se utilizarán para los propósitos mencionados en este estudio.</p>
+		<p>Los datos de este estudio se almacenarán en un lugar seguro, el Instituto de Investigaciones Psicológicas, en conformidad con las regulaciones de la Asociación Americana de Psicología. Usted también tiene derecho a enviar un mensaje al equipo de investigación para obtener una copia de sus datos, corregirlos o solicitar que se eliminen.
+		</p>
+		<p>Si tiene dudas como participante en una investigación puede comunicarse con el comité de ética que aprobó esta investigación, CEIIPsi comite.etica.iipsi@psicologia.unc.edu.ar
+		</p>
+		<p>Para consultas relacionadas con el diseño de la investigación puede contactar al equipo de investigadores/as: Julieta Zapata (Julieta.m.zapata@gmail.com) y Nicolás Comay (nicocomay@gmail.com) 
+		</p>
+		<hr>
+		<h3>CONSENTIMIENTO INFORMADO:</h3>
+		<p>Al hacer click en el botón ACEPTAR que se encuentra al final de la página, expresa su conformidad para participar de una investigación titulada “Tarea de Apuestas de Iowa y Metacognición" que le ha sido claramente explicada. Confirma haber leído y comprendido la hoja de información, haber tenido la posibilidad de formular las preguntas y estar satisfecho/a con la información recibida. Confirma haber sido informado por los investigadores cuyos nombres se encuentran en el presente documento. 
+		</p>
+		<p>Confirma tener conocimiento de que su participación es libre y voluntaria y que puede retirarse sin perjuicio cuando lo desee. </p>
+		<p>Entiende que recibirá una remuneración solo en caso de resultar ganador entre los tres primeros puestos en el juego.</p>
+		<p>Los resultados podrán ser presentados en reuniones científicas o publicados en revistas especializadas manteniendo siempre la reserva de los datos personales. 
+		</p>
+		<p>Confirma ser mayor de 18 años.</p>
+		<p>Certifica no tener antecedentes de enfermedades neurológicas o psiquiátricas, ni consumir de manera crónica sustancias psicoactivas (alcohol, marihuana, etc.)</p>
+		<p>Acepta las cookies que utiliza esta página (el IP es registrado automáticamente, pero no es guardado por los investigadores responsables del estudio).</p>
+	
+	</div>
+
+	<!-- instructions-->
+	<div class='inicio' id='instrucciones'>	
+		<h1 style="text-align:center"><b>TAREA DE APUESTAS DE IOWA</b></h1>
+		<p>Bienvenido/a. Esta tarea se trata de un juego de cartas en el que, según la carta que elijas, ganarás o perderás dinero.
+			 El objetivo del juego es finalizar con la mayor cantidad de dinero posible. Estas son las reglas del juego:</p>
+			<br>
+			<li>Delante tuyo en la pantalla aparecerán cuatro mazos de cartas (A, B, C, D) 
+				y una barra verde debajo de los mazos que indica la cantidad de dinero con la que contás al iniciar el juego ($2000).</li>
+			<br>
+			<img class="example" alt="ejemplo" src="decks_example.png" style="width:600px;height:200px";/>
+			<figcaption style="font-size:12px; font-family: 'Times New Roman', Times, serif; color:black"><i>Imagen ilustrativa</i></figcaption>
+			<br>
+			<li>En cada ensayo deberás seleccionar una carta haciendo click en uno de los mazos. </li>                       
+	</div>
+
+	<div class='inicio' id='instrucciones2'>
+		<li>Luego de cada elección aparecerá una pregunta: “¿Qué tan seguro estás?”.
+			 Tu tarea acá será reportar el grado de confianza que tengas en que has realizado una buena elección en una escala de 1 (nada seguro/a) a 4 (muy seguro/a).</li>
+		<br>
+			 <li> La pregunta y la escala se ven como en la imagen de abajo. Para reportar la seguridad en tu decisión, simplemente hacé click en uno de los cuatro botones (1, 2, 3 ó 4).</li>
+		<br>	
+		
+		<img class="example" alt="ejemplo" src="confbuttons.PNG" style="width:600px;height:200px";/>
+		<figcaption style="font-size:12px; font-family: 'Times New Roman', Times, serif; color:black"><i>Imagen ilustrativa</i></figcaption>
+			
+	</div>
+
+	<div class='inicio' id='instrucciones3'>
+			<li>Luego de reportar tu confianza en tu decisión, la computadora te dirá que ganaste determinada cantidad de dinero 
+				y la barra verde se volverá más grande. Así se ve en el juego:</li>
+				<img class="example" alt="ejemplo" src="feedback.PNG" style="width:150px;height:100px";/>
+			<p></p>
+			<li>Sin embargo, de vez en cuando, al elegir una carta la computadora te dirá que ganaste cierta cantidad de dinero <b>pero también perdiste cierta cantidad de dinero</b>. 
+				Cada vez que pierdas la barra verde se vuelve más pequeña. Así se ve en el juego:</li><p></p>
+				<img class="example" alt="ejemplo" src="feedbackloss.png" style="width:150px;height:100px";/>
+			<p></p>						
+			<li>Sos absolutamente libre de cambiar de un mazo a otro cuando lo desees.</li>
+			<br>
+			<li>El objetivo del juego es ganar la mayor cantidad de dinero posible y, si no podés ganar, asegurate de perder la menor cantidad de dinero posible</li>
+			<br>
+			<li> No sabrás cuánto dura el juego. Debés jugar hasta que la computadora se detenga.</li>
+			<br>
+			<li>Recibirás un crédito inicial de $ 2000 para comenzar el juego y al finalizar veremos cuánto ganaste o perdiste.</li>
+			<br>
+			</div>
+		
+
+	<div class='inicio' id='instrucciones4'>
+		<li>Es importante saber que, al igual que en un juego de cartas real, la computadora no cambia el orden de las cartas una vez que el juego comienza.
+			No debés intentar averiguar qué está haciendo la computadora porque no te hará perder plata de manera arbitraria ni en base a la última carta que elegiste.</li>
+			<br>
+			<li>Todo lo que te podemos decir es que algunos mazos son mejores que otros y que podés ganar si te mantenés alejado de los mazos malos, sin importar cuánto dinero hayas perdido hasta ese momento. </li>
+			<br>
+			<li>Por último, te pedimos que imagines que el dinero del juego es dinero real y que tomes cada decisión como si fuese tu propio dinero. Recordá que lxs 3 jugadorxs que finalicen con la mayor cantidad de dinero recibirán vouchers para libros como premio. </li>
+			<br>
+			<HR>
+			<p>Antes de empezar, te pedimos que completes los siguientes campos:</p>
+				<form name="personales" id="form1">
+				<P><SPAN style="display:inline-block;width:100px">Nombre:</SPAN><INPUT length="64" name=Name id="Name" value="" onkeyup="validateFields();"></P>
+				<P><SPAN style="display:inline-block;width:100px">G&eacute;nero:</SPAN><SELECT id="Gender" name=Gender onchange="validateFields();"><OPTION value="f">Femenino</OPTION><OPTION value="m" selecte="selected">Masculino</OPTION><OPTION value="noBinario" selecte="selected">No binario</OPTION><OPTION value="Pref_no_responder" selecte="selected">Prefiero no responder</OPTION></SELECT> </P>
+				<P><SPAN style="display:inline-block;width:100px">Edad:</SPAN><INPUT length="2" id="Age" name=Age onkeyup="validateFields();"> </P>
+				<P><SPAN style="display:inline-block;width:100px">Email:</SPAN><INPUT length="64" name=Name id="email" value="" onkeyup="validateFields();"> <small>* necesario para poder contactarte si resultas ganador/a.</small> </P>
+				</form>
+			<p>Cuando estés listo/a, presiona el botón 'comenzar'. ¡Mucha suerte! </p>
+	</div>
+
+	<div class='inicio' id='clickparacontinuar'> 
+		<h1 style='text-align: center;'>HACÉ CLICK AQUÍ PARA CONTINUAR</h1>
+	</div>
+	<div class='inicio' id='confquestion'> 
+		<h1 style='text-align: center;'>¿Qué tan seguro/a estás?</h1>
+	</div>
+
+
+
+	<!-- instructions and informed consent buttons -->
+	<div>
+		<button type='button' class='buttons' id='boton_atras' onclick="$('#boton_atras').css('visibility','hidden');$('#consentimiento').css('visibility','visible');$('#instrucciones').css('visibility','hidden'); $('#boton_comenzar').css('visibility','hidden'); $('#consent_button').css('visibility','visible');$('#boton_siguiente1').css('visibility','hidden');" >Atrás</button>
+	</div>
+	<div>
+		<button type='button' class='buttons' id='boton_atras2' onclick="$('#instrucciones').css('visibility','visible');$('#instrucciones2').css('visibility','hidden');$('#boton_siguiente2').css('visibility','hidden');$('#boton_siguiente1').css('visibility','visible');$('#boton_atras2').css('visibility','hidden');$('#boton_atras').css('visibility','visible');">Atrás</button>
+	</div>
+	<div>
+		<button type='button' class='buttons' id='boton_atras3' onclick="$('#instrucciones2').css('visibility','visible');$('#instrucciones3').css('visibility','hidden');$('#boton_atras3').css('visibility','hidden');$('#boton_atras2').css('visibility','visible');$('#boton_siguiente3').css('visibility','hidden');$('#boton_siguiente2').css('visibility','visible')">Atrás</button>
+	</div>
+	
+	<div>
+		<button type='button' class='buttons' id='boton_atras4' onclick="$('#instrucciones3').css('visibility','visible');$('#instrucciones4').css('visibility','hidden');$('#boton_atras4').css('visibility','hidden');$('#boton_atras3').css('visibility','visible');$('#boton_comenzar').css('visibility','hidden');$('#boton_siguiente3').css('visibility','visible')">Atrás</button>
+	</div>
+	
+	<div class='buttons' id='consent_button' onclick= "$('#boton_atras').css('visibility','visible'); $('#instrucciones').css('visibility','visible'); $('#consentimiento').css('visibility','hidden'); $('#consent_button').css('visibility','hidden'); $('#boton_siguiente1').css('visibility','visible'); $(window).scrollTop(0); document.documentElement.requestFullscreen();"><button>Aceptar</button></div>
+
+	<div>
+		<button type='button' class='buttons' id='boton_siguiente1' onclick="$('#instrucciones2').css('visibility','visible'); $('#instrucciones').css('visibility','hidden'); $('#boton_siguiente1').css('visibility','hidden'); $('#boton_siguiente2').css('visibility','visible'); $('#boton_atras').css('visibility','hidden'); $('#boton_atras2').css('visibility','visible')";>Siguiente</button>
+	</div>
+
+	<div>
+		<button type='button' class='buttons' id='boton_siguiente2' onclick="$('#instrucciones3').css('visibility','visible'); $('#instrucciones2').css('visibility','hidden'); $('#boton_siguiente2').css('visibility','hidden'); $('#boton_siguiente3').css('visibility','visible'); $('#boton_atras2').css('visibility','hidden'); $('#boton_atras3').css('visibility','visible');";>Siguiente</button>
+	</div>
+	<div>
+		<button type='button' class='buttons' id='boton_siguiente3' onclick="$('#instrucciones4').css('visibility','visible'); $('#instrucciones3').css('visibility','hidden'); $('#boton_comenzar').css('visibility','visible'); $('#boton_siguiente3').css('visibility','hidden'); $('#boton_atras4').css('visibility','visible'); $('#boton_atras3').css('visibility','hidden')">Siguiente</button>
+	</div>	
+	<div>
+		<button type="button"  id='boton_comenzar' disabled onclick= "$('.row').css('visibility','visible'); $('.inicio').css('visibility','hidden'); $('.buttons').css('visibility','hidden'); $('#boton_comenzar').css('visibility', 'hidden');">Comenzar</button>
+	</div>
+
+	<!-- confidence buttons -->
+	<div class="confbuttons" id="conf1"><button><p style='font-size: 40px;'>1</p><p>Nada seguro/a</p></button></div>
+	<div class="confbuttons" id="conf2"><button><p style='font-size: 40px;'>2</p></button></div>
+	<div class="confbuttons" id="conf3"><button><p style='font-size: 40px;'>3</p></button></div>
+	<div class="confbuttons" id="conf4"><button><p style='font-size: 40px;'>4</p><p>Muy seguro/a</p></button></div>
+	
+	<!-- finish buttons-->
+	<div class="buttons" id="finishbutton1"><button>Finalizar estudio</button></div>
+	<div class="buttons" id="finishbutton2"><button>Finalizar y sumarme a nuevos estudios</button></div>
+	
+	<!-- finish text-->
+	<div class="final" id='texto_final'>
+		<p>La tarea ha finalizado, ¡muchas gracias por haber participado!</p>
+		<p>Cada vez somos más investigadores realizando experimentos online para entender científicamente diferentes procesos cognitivos. Si querés ayudar a esta red, podés anotarte para participar de futuros experimentos tocando el botón que dice "finalizar y sumarme a nuevos estudios". Ese botón te redirigirá a un grupo de Google de experimentos online creado y administrado por investigadores de CONICET. Uniéndote a ese grupo, cada vez que haya un experimento nuevo te llegará un mail invitándote a participar (nunca se usará el grupo para otra cosa y tu email permanecerá confidencial).</p>
+		<p>Si preferís que no, simplemente tocá el botón que dice "finalizar estudio".</p>
+		<p><i><b>Es imporante que toques uno de los dos botones así tus respuestas quedan registradas.</b> Si por la razón que sea no querés que tus resultados sean guardados, simplemente cerrá esta ventana sin tocar ningún botón de finalización.</i></p>
+		<p>Si tenés dudas y/o consultas, podés escribirle a les investigadores responsables de este estudio:
+			<li>Julieta Zapata - <i>julieta.m.zapata@gmail.com</i></li>
+			<li>Nicolás Comay - <i>nicocomay@gmail.com</i></li>
+		</p>
+	</div>
+    
+
+</main>
+ 
+<!-- DEVELOPMENT DEBUGGING -->
+<!-- Jquery 1.9 is the last to support IE8 and lower -->
+<!--[if lt IE 9]>
+    <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script>console.warn("Please update to the lastest browser. Running in depreciated mode");</script>
+<![endif]-->
+<!--[if gte IE 9]><!-->
+    <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
+<!--<![endif]-->
+<script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>  <!--"text/javascript"-->
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+<!--<script type="text/javascript" src="igt.016.min.js"></script>-->
+</body>
+</html>
