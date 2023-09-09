@@ -1,5 +1,5 @@
 # IGTandMetacognition
-This repository contains the data, the scripts for the data analysis and the scripts for the experimental task of the study "_Knowledge as a necessary condition to advantageous decision making under uncertainty: metacognitive sensitivity on the Iowa Gambling Task_" (Zapata, Comay, Barttfeld, Solovey, Saal & Ahumada; _submitted_).
+This repository contains the data, the scripts for the data analysis and the scripts for the experimental task of the study "_Metacognitive sensitivity on the Iowa Gambling Task reveals awareness as a necessary condition for advantageous performance_" (Zapata, Comay, Barttfeld, Solovey, Saal & Ahumada; _submitted_).
 
 # Data organization 
 Rows are trials, and columns are organized as follows: 
