@@ -2,10 +2,10 @@
 This repository contains the data, the scripts for the data analysis and the scripts for the experimental task of the study "_Metacognitive sensitivity on the Iowa Gambling Task reveals awareness as a necessary condition for advantageous performance_" (Zapata, Comay, Taricco, Barttfeld, Solovey, Saal & Ahumada; _submitted_). 
 
 # Scripts
-_analysis.R_ replicates all analysis and figures reported in the study. 
-_auroc2.R_ computes the area under a "type 2" ROC curve. 
-_preprocessData.R_ performs exclusion of subjects based on the reported criteria. 
-_simAUROC.R_ replicates figure 2 from the manuscript. 
+* _analysis.R_ replicates all analysis and figures reported in the study. 
+* _auroc2.R_ computes the area under a "type 2" ROC curve. 
+* _preprocessData.R_ performs exclusion of subjects based on the reported criteria. 
+* _simAUROC.R_ replicates figure 2 from the manuscript. 
 
 # Data organization 
 Data from each experiment is on the respective experiment folder in a .csv format. Two archives per experiments are present, one for the raw unprocessed data and other with the filtered data (i.e., with the reported subjects excluded).
