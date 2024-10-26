@@ -1,0 +1,59 @@
+library(dplyr)
+
+# load data
+data <- read.csv('rawdata.csv')
+
+# filter data 
+for(i in 1:max(data$nsubj)){
+  subj <- data[data$nsubj==i,]
+  
+  # did the subject explore all decks?
+  if(length(unique(subj$cardSelected)) < 4){
+    cat('Subject', i, 'has been excluded due to not exploring all decks\n')
+    data <- data[data$nsubj != i,]
+  }
+  
+  # now check confidence levels
+  subj %>%
+    group_by(confidence) %>%
+    mutate(conffreq = n()) %>%
+    ungroup() -> subj 
+  
+  subjprop <- .85 * length(subj$trialNumber)
+  if(any(subj$conffreq>subjprop)){
+    data <- data[data$nsubj != i,]  # same rating >85% time, exclude subj 
+    cat('Subject', i, 'has been excluded due to same confidence in more than 85 trials\n')
+  }
+  
+}
+
+
+# add block column
+data %>%
+  mutate(block = case_when(
+    trialNumber <= 20 ~ 1, 
+    trialNumber > 20 & trialNumber <= 40 ~ 2, 
+    trialNumber > 40 & trialNumber <= 60  ~ 3, 
+    trialNumber > 60 & trialNumber <= 80  ~ 4, 
+    trialNumber > 80 ~ 5
+  )) -> data
+
+
+# compute metacognition & p(correct) per block
+source('auroc2.R')
+
+data$metacog <- NA; data$perfBlock <- NA
+for(i in unique(data$nsubj)){
+  for(j in 1:5){
+    # block correct rate
+    data[data$nsubj==i & data$block==j,]$perfBlock <- mean(data[data$nsubj==i & data$block==j,]$correct)
+    
+    # metacog
+    data[data$nsubj==i & data$block==j,]$metacog <- type2roc(data[data$nsubj==i & data$block==j,]$correct,
+                                                             data[data$nsubj==i & data$block==j,]$confidence,
+                                                             4)
+  }
+}
+
+# write csv
+write.csv(data, 'filtereddata.csv',row.names=F)
